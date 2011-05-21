@@ -25,11 +25,25 @@ import com.elmakers.mine.bukkit.utilities.CSVParser;
 public class Portal extends Persisted
 {
     protected static final String DEFAULT_DESTRUCTIBLES = "0,1,2,3,4,10,11,12,13,14,15,16,21,51,56,78,79,82,87,88,89";
-
     protected static MaterialList destructible          = null;
-
     protected static MaterialList needsPlatform         = null;
 
+    protected boolean       active;
+    protected BlockList     blocks;
+    protected PortalArea    container;
+    protected NetherPlayer  creator;
+    protected int           id;
+    protected Date          lastUsed;
+    protected NetherPlayer  lastUsedBy;
+    protected LocationData  location;
+    protected String        name;
+    protected Portal        target;
+    protected PortalType    type;
+    protected boolean       updatePending;
+
+    // transient
+    protected NetherManager manager;
+    
     protected static void buildFrame(Block centerBlock, BlockFace facing, BlockList blockList)
     {
         BoundingBox leftSide = new BoundingBox(centerBlock.getX() - 2, centerBlock.getY() - 1, centerBlock.getZ() - 1, centerBlock.getX() - 1, centerBlock.getY() + 4, centerBlock.getZ());
@@ -56,33 +70,6 @@ public class Portal extends Persisted
 
         container.fill(centerBlock.getWorld(), Material.AIR, destructible, blockList);
     }
-
-    protected boolean       active;
-
-    protected BlockList     blocks;
-
-    protected PortalArea    container;
-
-    protected NetherPlayer  creator;
-
-    protected int           id;
-
-    protected Date          lastUsed;
-
-    protected NetherPlayer  lastUsedBy;
-
-    protected LocationData  location;
-
-    // transient
-    protected NetherManager manager;
-
-    protected String        name;
-
-    protected Portal        target;
-
-    protected PortalType    type;
-
-    protected boolean       updatePending;
 
     public Portal()
     {

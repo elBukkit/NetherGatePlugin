@@ -26,11 +26,11 @@ permissions:
               kit:
                 description: Can receive a portalling kit
                 type: boolean
-                default: false
+                default: true
               compass:
                 description: Can use the compass command
                 type: boolean
-                default: false           
+                default: true           
               area:
                 description: Can manage areas
                 type: map

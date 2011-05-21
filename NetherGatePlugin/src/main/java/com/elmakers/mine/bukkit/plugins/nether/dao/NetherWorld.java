@@ -16,19 +16,14 @@ import com.elmakers.mine.bukkit.plugins.nether.NetherManager;
 public class NetherWorld extends Persisted
 {
     protected BlockVector  centerOffset;
+    protected double       scale;
+    protected PortalArea   targetArea;
+    protected BlockVector  targetOffset;
+    protected NetherWorld  targetWorld;
+    protected WorldData    world;
 
     // Transient
     protected List<Portal> portals;
-
-    protected double       scale;
-
-    protected PortalArea   targetArea;
-
-    protected BlockVector  targetOffset;
-
-    protected NetherWorld  targetWorld;
-
-    protected WorldData    world;
 
     public NetherWorld()
     {
@@ -69,9 +64,6 @@ public class NetherWorld extends Persisted
     {
         currentWorld.targetWorld = this;
         targetWorld = currentWorld;
-
-        // Save changes to current world target
-        getPersistence().put(currentWorld);
     }
 
     public Portal findPortalAt(BlockVector position)

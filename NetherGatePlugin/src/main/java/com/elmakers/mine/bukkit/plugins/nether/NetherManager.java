@@ -434,7 +434,9 @@ public class NetherManager
                 targetWorld = getDefaultNether();
                 if (targetWorld != null)
                 {
-                    thisWorldData.bind(thisWorldData);
+                    thisWorldData.bind(targetWorld);
+                    persistence.put(targetWorld);
+                    persistence.put(thisWorldData);
                 }
             }
         }

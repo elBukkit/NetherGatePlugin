@@ -6,6 +6,7 @@
  - Some changes to make NG play nicer with other multi-world plugins, mainly Essentials
  - Add "world load" command
  - Remove auto-daisy-chaining of worlds
+ - Give "kit" and "compass" out by default
 
 # 0.54
 
