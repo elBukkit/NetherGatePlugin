@@ -15,6 +15,7 @@ import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.scheduler.BukkitScheduler;
 import org.bukkit.util.BlockVector;
 import org.bukkit.util.Vector;
 
@@ -58,17 +59,12 @@ public class NetherManager
     }
 
     protected long                                   disabledPhysics = 0;
-
     protected List<PortalArea>                       netherAreas     = new ArrayList<PortalArea>();
-
     protected Persistence                            persistence;
-
     protected HashMap<BlockVector, BlockRequestList> requestMap      = new HashMap<BlockVector, BlockRequestList>();
-
     protected Server                                 server;
-
+    protected NetherGatePlugin                       plugin;
     protected HashMap<BlockVector, PlayerList>       teleporting     = new HashMap<BlockVector, PlayerList>();
-
     protected PluginUtilities                        utilities;
 
     protected void addToMap(PortalArea nether)
@@ -265,6 +261,12 @@ public class NetherManager
     }
 
     protected void finishTeleport(NetherPlayer playerData, World world)
+    {
+        BukkitScheduler scheduler = server.getScheduler();
+        scheduler.scheduleSyncDelayedTask(plugin, new TeleportPlayerTask(this, playerData, world), 5);
+    }
+    
+    protected void finallyDoTeleport(NetherPlayer playerData, World world)
     {
         Player player = server.getPlayer(playerData.getPlayer().getName());
         if (player != null)
@@ -535,11 +537,12 @@ public class NetherManager
         return targetWorld.getWorld();
     }
 
-    public void initialize(Server server, Persistence persistence, PluginUtilities utilities)
+    public void initialize(Server server, Persistence persistence, PluginUtilities utilities, NetherGatePlugin plugin)
     {
         this.server = server;
         this.utilities = utilities;
         this.persistence = persistence;
+        this.plugin = plugin;
 
         load();
 

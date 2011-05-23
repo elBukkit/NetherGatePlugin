@@ -130,7 +130,7 @@ public class NetherGatePlugin extends JavaPlugin
             return false;
         }
 
-        manager.initialize(getServer(), persistence, utilities);
+        manager.initialize(getServer(), persistence, utilities, this);
 
         netherCommand = utilities.getGeneralCommand("nether", "Manage portal areas and worlds", null);
         areaCommand = netherCommand.getSubCommand("area", "Manage portal areas", null);

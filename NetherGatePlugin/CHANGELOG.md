@@ -1,5 +1,9 @@
 # CHANGELOG
 
+# 0.56
+
+ - Use bukkitsched to try to avoid "moved to quickly" issue.
+
 # 0.55
 
  - Refactor for Persistence 0.75
